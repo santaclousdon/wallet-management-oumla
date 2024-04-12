@@ -25,7 +25,6 @@ const Sender: React.FC<SenderProps> = ({ btcPrice, address }) => {
 
   const onSendTransaction = async () => {
     const btcValidate = validate(walletContext.toAddress!);
-    console.log("btcValidate", btcValidate);
     if (!btcValidate) {
       walletContext.setToastrState("sendError");
       walletContext.setShowToastr(false); // Reset the toastr to hide, allowing re-trigger
@@ -34,15 +33,12 @@ const Sender: React.FC<SenderProps> = ({ btcPrice, address }) => {
       }, 100); // Short delay before showing it again
     } else {
       if (!walletContext.reference) return;
-      console.log("From Address", address.address);
-      console.log("To Address", walletContext.toAddress);
       const sendTransactionResponse = await sendTransactionAPI(
         walletContext.reference,
         walletContext.fromAddress!,
         walletContext.toAddress!,
         walletContext.amount!
       );
-      console.log("SendTransactionResponse", sendTransactionResponse);
     }
   };
 

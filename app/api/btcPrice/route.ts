@@ -5,7 +5,6 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest, res: NextResponse) {
   // Check for GET request
   if (req.method === 'GET') {
-    console.log('called btcPrice api')
     try {
       const response = await fetch('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=BTC', {
         headers: {
@@ -13,8 +12,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
           'Content-Type': 'application/json'
         }
       });
-
-      console.log("response => ", response)
 
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
@@ -39,9 +36,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
       )
     }
   } else {
-    // Handle any requests that aren't GET
-    // res.setHeader('Allow', ['GET']);
-    // res.status(405).end(`Method ${req.method} Not Allowed`);
     return new NextResponse(
       `Method ${req.method} Not Allowed`,
       {

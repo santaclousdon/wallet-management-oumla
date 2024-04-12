@@ -13,8 +13,6 @@ export async function POST(req: NextRequest) {
       });
 
       const allAddress = await client.getAddresses();
-      console.log("ALL ADDRESS", allAddress);
-
       return new NextResponse(
         JSON.stringify({ data: allAddress }),
         {
@@ -31,9 +29,6 @@ export async function POST(req: NextRequest) {
       )
     }
   } else {
-    // Handle any requests which aren't POST
-    // res.setHeader("Allow", ["POST"]);
-    // res.status(405).end(`Method ${req.method} Not Allowed`);
     return new NextResponse(
       `Method ${req.method} Not Allowed`,
       {

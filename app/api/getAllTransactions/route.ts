@@ -16,8 +16,6 @@ export async function POST(req: NextRequest) {
         network: "BTC",
         reference: body.reference
       });
-      console.log("ALL ADDRESS", transactions);
-
       return new NextResponse(
         JSON.stringify({ data: transactions }),
         {
@@ -34,9 +32,6 @@ export async function POST(req: NextRequest) {
       )
     }
   } else {
-    // Handle any requests which aren't POST
-    // res.setHeader("Allow", ["POST"]);
-    // res.status(405).end(`Method ${req.method} Not Allowed`);
     return new NextResponse(
       `Method ${req.method} Not Allowed`,
       {

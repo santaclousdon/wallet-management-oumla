@@ -15,7 +15,6 @@ export default function Home() {
   const walletContext = useWalletContext();
 
   useEffect(() => {
-    console.log("LocalStorage Reference: ", localStorage.getItem("reference"));
     const storedUUID = localStorage.getItem("reference");
     if (localStorage.getItem("reference")) {
       setReference(storedUUID!);
@@ -27,9 +26,7 @@ export default function Home() {
   const openModal = (index: number) => setIsModalState(index);
 
   const onCreateUUID = async (index: number) => {
-    console.log("API KEY: ", process.env.OUMLA_API_KEY);
     const newUUID = uuidv4();
-    console.log("Reference: ", newUUID); // For demonstration, though you might want to store or send this
     // Store the UUID in local storage
     localStorage.setItem("reference", newUUID);
     try {
@@ -49,8 +46,6 @@ export default function Home() {
       }
 
       const profile = await profileResponse.json();
-      console.log("PROFILE", profile);
-
       setIsModalState(index);
     } catch (error) {
       console.error("Error creating profile:", error);

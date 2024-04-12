@@ -10,7 +10,6 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    console.log("LocalStorage Reference: ", localStorage.getItem("reference"));
     const storedUUID = localStorage.getItem("reference");
     if (localStorage.getItem("reference")) {
       setReference(storedUUID!);
@@ -22,10 +21,7 @@ export default function Home() {
   const openModal = (index: number) => setIsModalState(index);
 
   const onCreateUUID = async (index: number) => {
-    console.log("API KEY: ", process.env.OUMLA_API_KEY);
     const newUUID = uuidv4();
-    console.log("Reference: ", newUUID); // For demonstration, though you might want to store or send this
-
     // Store the UUID in local storage
     localStorage.setItem("reference", newUUID);
     try {
@@ -45,8 +41,6 @@ export default function Home() {
       }
 
       const profile = await profileResponse.json();
-      console.log("PROFILE", profile);
-
       setIsModalState(index);
     } catch (error) {
       console.error("Error creating profile:", error);
@@ -58,34 +52,6 @@ export default function Home() {
     "Here, your convenience and security are our top priorities, ensuring your financial management experience is unmatched. Join us on this journey to redefine the way you interact with your money, making it simpler, faster, and safer.";
 
   return (
-    // <div className="flex flex-col h-screen bg-proBack py-40 px-80 justify-between">
-    //   <div className="flex flex-col">
-    //     <div className="text-6xl text-proText text-center font-bold px-20 py-10">
-    //       {greetingSentences1}
-    //     </div>
-    //     <div className="text-xl text-proTextLight font-bold text-center px-36">
-    //       {greetingSentences2}
-    //     </div>
-    //   </div>
-    //   <div className="flex flex-row justify-between px-80 mb-32">
-    //     <button
-    //       data-modal-target="default-modal"
-    //       data-modal-toggle="default-modal"
-    //       data-modal-show="default-modal"
-    //       className="btn text-xl font-bold py-4 px-8 rounded text-white bg-blue-500 hover:bg-blue-700"
-    //       onClick={() => onCreateUUID(1)}
-    //     >
-    //       Create
-    //     </button>
-    //     <button
-    //       className="btn text-xl font-bold py-4 px-8 rounded text-white bg-blue-500 hover:bg-blue-700"
-    //       onClick={() => openModal(2)}
-    //     >
-    //       Import
-    //     </button>
-    //     <Modal isOpen={isModalState} onClose={closeModal} />
-    //   </div>
-    // </div>
     <div className="flex h-screen w-screen bg-proBack justify-center">
       <div className="flex flex-col max-w-[1400px]">
         <div className="flex flex-row justify-between items-center h-heightHead w-full">

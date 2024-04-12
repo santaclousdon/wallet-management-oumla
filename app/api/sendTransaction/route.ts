@@ -4,9 +4,7 @@ import { Oumla } from "@oumla/sdk";
 export async function POST(req: NextRequest) {
 
   const body = await req.json();
-  console.log("Transaction BODY:", body);
-  const{reference, from, to, amount} = body;
-
+  const{ from, to, amount} = body;
   if (req.method === "POST") {
     try {
       const client = new Oumla({
@@ -20,8 +18,6 @@ export async function POST(req: NextRequest) {
         from: [from],
         to: to
       });
-
-      console.log("Result", result);
 
       return new NextResponse(
         JSON.stringify({ data: result }),
@@ -39,9 +35,6 @@ export async function POST(req: NextRequest) {
       )
     }
   } else {
-    // Handle any requests which aren't POST
-    // res.setHeader("Allow", ["POST"]);
-    // res.status(405).end(`Method ${req.method} Not Allowed`);
     return new NextResponse(
       `Method ${req.method} Not Allowed`,
       {

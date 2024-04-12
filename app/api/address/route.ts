@@ -6,8 +6,6 @@ export async function POST(req: NextRequest) {
   const body = await req.json()
 
   if (req.method === "POST") {
-  console.log("WALLET BODYYYYYYYYYYYYYYYYYY: ", body);
-
     try {
       const client = new Oumla({
         apiKey: process.env.OUMLA_API_KEY!,
@@ -24,14 +22,10 @@ export async function POST(req: NextRequest) {
           reference: body.reference
         });
 
-        console.log('newAddress => ', newBtcAddress)
-
         address  = await client.getAddresses({
           reference: body.reference
         });
       }
-
-      console.log("ADDRESS", address);
 
       return new NextResponse(
         JSON.stringify({ data: address }),
@@ -49,9 +43,6 @@ export async function POST(req: NextRequest) {
       )
     }
   } else {
-    // Handle any requests which aren't POST
-    // res.setHeader("Allow", ["POST"]);
-    // res.status(405).end(`Method ${req.method} Not Allowed`);
     return new NextResponse(
       `Method ${req.method} Not Allowed`,
       {

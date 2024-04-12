@@ -6,8 +6,6 @@ export async function POST(req: NextRequest) {
   const body = await req.json()
 
   if (req.method === "POST") {
-  console.log("WALLET BODYYYYYYYYYYYYYYYYYY: ", body);
-
     try {
       const client = new Oumla({
         apiKey: process.env.OUMLA_API_KEY!,
@@ -18,8 +16,6 @@ export async function POST(req: NextRequest) {
         network: "BTC",
         reference: body.reference
       });
-
-      console.log("WALLET", wallet);
 
       return new NextResponse(
         JSON.stringify({ data: wallet }),
